@@ -19,3 +19,8 @@ jobs:
       - run: mkdir $HOME/.aws
       - run: mv aws.config $HOME/.aws/config
       - run : aws sso login  --no-browser
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.2"
+      - run: terraform init && terraform apply -auto-approve
+      - run: aws sts get-caller-identity --profile crc-dev
