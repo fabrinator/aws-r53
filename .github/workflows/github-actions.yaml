@@ -20,3 +20,4 @@ jobs:
           role-to-assume: arn:aws:iam::912008965710:role/github-actions-role
 
       - run: aws sts get-caller-identity
+      - run: aws s3 ls
