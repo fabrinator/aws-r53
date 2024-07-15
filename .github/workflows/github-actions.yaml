@@ -6,6 +6,8 @@ on:
       - opened
       - synchronize
 
+permissions:
+  id-token: write
 jobs:
   configure_auth:
     runs-on: ubuntu-latest
