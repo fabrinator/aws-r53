@@ -14,10 +14,6 @@ jobs:
     name: Requirements
     environment:  auto
     steps:
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::912008965710:role/github-actions-role
-
-      - run: aws sts get-caller-identity
-      - run: aws s3 ls
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: mv aws.config $HOME/.aws/config
