@@ -3,7 +3,7 @@ provider "aws" {
   assume_role_with_web_identity {
     role_arn                = "arn:aws:iam::621897290135:role/oidc-github-actions"
 #     session_name            = "SESSION_NAME"
-    web_identity_token = var.TF_VAR_ACTIONS_RUNTIME_TOKEN
+    web_identity_token = var.ACTIONS_RUNTIME_TOKEN
   }
 }
 
@@ -13,4 +13,4 @@ output "out" {
   value = data.aws_caller_identity.this.account_id
 }
 
-# variable "ACTIONS_RUNTIME_TOKEN" {}
+variable "ACTIONS_RUNTIME_TOKEN" {}
