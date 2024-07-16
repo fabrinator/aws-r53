@@ -5,39 +5,13 @@ on:
     types:
       - opened
       - synchronize
-
-env:
-  AWS_REGION: "us-east-1"
-
 permissions:
   id-token: write
 jobs:
-  configure_auth:
-    runs-on: ubuntu-latest
-    name: Requirements
-    environment:  auto
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::621897290135:role/oidc-github-actions
-      - run: aws sts get-caller-identity
-      - run: aws s3 ls
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-      - name: Get Id Token
-        uses: actions/github-script@v7
-        id: idtoken
-        with:
-          script: |
-            const action_core = require('@actions/core')
-            let id_token = await action_core.getIDToken('sts.amazonaws.com')
-            action_core.setOutput('id_token', id_token)
-      - run: echo $VAR
-        env:
-          VAR: ${{ steps.idtoken.outputs.id_token }}
-      - run: terraform init && terraform apply -auto-approve
-        env:
-          TF_VAR_id_token: ${{ steps.idtoken.outputs.id_token }}
+  terraform:
+    name: TF OIDC AUTH
+    uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
+    with:
+      TERRAFORM_VERSION: "1.9.2"
+      AWS_REGION: "us-east-1"
+      TF_WORKING_DIRECTORY: "."
