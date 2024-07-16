@@ -26,7 +26,7 @@ jobs:
           role-session-name: bootcamp-account
       - run: aws sts get-caller-identity
       - run: aws s3 ls
-      - run: $HOME/.aws/*
+      - run: cat $HOME/.aws/*
       - run: terraform init && terraform apply -auto-approve
         env:
           TF_VAR_ACTIONS_RUNTIME_TOKEN: ${{ env.ACTIONS_RUNTIME_TOKEN }}
