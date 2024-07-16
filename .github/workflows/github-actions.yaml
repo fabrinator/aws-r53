@@ -8,7 +8,6 @@ on:
 
 env:
   AWS_REGION: "us-east-1"
-  TF_VAR_ACTIONS_RUNTIME_TOKEN: ${{ env.ACTIONS_RUNTIME_TOKEN }}
 
 permissions:
   id-token: write
@@ -28,3 +27,5 @@ jobs:
       - run: aws sts get-caller-identity
       - run: aws s3 ls
       - run: terraform init && terraform apply -auto-approve
+        with:
+          TF_VAR_ACTIONS_RUNTIME_TOKEN: ${{ env.ACTIONS_RUNTIME_TOKEN }}
