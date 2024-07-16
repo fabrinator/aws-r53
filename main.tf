@@ -21,7 +21,7 @@ data "aws_caller_identity" "this" {
 }
 
 data "aws_caller_identity" "this2" {
-  provider = aws.bootcamp-account
+  provider = aws.crc-dev
 }
 
 output "out" {
