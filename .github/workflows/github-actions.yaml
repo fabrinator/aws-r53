@@ -22,5 +22,5 @@ jobs:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::621897290135:role/oidc-github-actions
           role-session-name: bootcamp-account
-      - run: aws sts get-caller-identity --profile bootcamp-account
+      - run: aws sts get-caller-identity
       - run: aws s3 ls
