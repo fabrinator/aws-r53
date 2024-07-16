@@ -26,19 +26,19 @@ jobs:
           role-session-name: bootcamp-account
       - run: aws sts get-caller-identity
       - run: aws s3 ls
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-      - name: Get Id Token
-        uses: actions/github-script@v7
-        id: idtoken
+      - uses: actions/github-script@v6
+        id: script
+        timeout-minutes: 10
         with:
+          debug: true
           script: |
-            const coredemo = require('@actions/core')
-            let id_token = await coredemo.getIDToken()
-            coredemo.setOutput('id_token', id_token)
+            const token = process.env['ACTIONS_RUNTIME_TOKEN']
+            const runtimeUrl = process.env['ACTIONS_ID_TOKEN_REQUEST_URL']
+            core.setOutput('TOKEN', token.trim())
+            core.setOutput('IDTOKENURL', runtimeUrl.trim())
       - run: echo $VAR
         env:
-          VAR: ${{ steps.idtoken.outputs.id_token }}
+          VAR: ${{ steps.script.outputs.TOKEN }}
       - run: terraform init && terraform apply -auto-approve
         env:
-          TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.idtoken.outputs.id_token }}
+          TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.script.outputs.TOKEN }}
