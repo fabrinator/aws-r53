@@ -32,9 +32,9 @@ jobs:
         id: idtoken
         with:
           script: |
-            const core = require('@actions/core')
-            let id_token = await core.getIDToken('sts.amazonaws.com')
-            core.setOutput('id_token', id_token)
+            const action_core = require('@actions/core')
+            let id_token = await action_core.getIDToken('sts.amazonaws.com')
+            action_core.setOutput('id_token', id_token)
       - run: echo $VAR
         env:
           VAR: ${{ steps.idtoken.outputs.id_token }}
