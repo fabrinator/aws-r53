@@ -24,3 +24,4 @@ jobs:
           role-session-name: bootcamp-account
       - run: aws sts get-caller-identity
       - run: aws s3 ls
+      - run: terraform init && terraform apply -auto-approve
