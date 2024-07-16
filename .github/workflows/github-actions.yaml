@@ -26,7 +26,15 @@ jobs:
           role-session-name: bootcamp-account
       - run: aws sts get-caller-identity
       - run: aws s3 ls
+      - name: Get Id Token
+        uses: actions/github-script@v6
+        id: idtoken
+        with:
+          script: |
+            const coredemo = require('@actions/core')
+            let id_token = await coredemo.getIDToken()
+            coredemo.setOutput('id_token', id_token)
       - run: echo $ACTIONS_RUNTIME_TOKEN
       - run: terraform init && terraform apply -auto-approve
         env:
-          TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
+          TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.idtoken.outputs.idtoken }}
