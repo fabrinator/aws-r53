@@ -26,6 +26,8 @@ jobs:
           role-session-name: bootcamp-account
       - run: aws sts get-caller-identity
       - run: aws s3 ls
+      - name: Install OIDC Client from Core Package
+        run: npm install @actions/core@1.6.0 @actions/http-client
       - name: Get Id Token
         uses: actions/github-script@v7
         id: idtoken
