@@ -16,3 +16,11 @@ resource "local_file" "aws_config" {
   })
 }
 
+resource "local_file" "file" {
+  for_each = fileset("./templates", "*tmpl")
+  filename = trim("${path.cwd}/oidc-github/${each.key}", ".tmpl")
+  content = templatefile("./templates/${each.key}", {
+    all_accounts = local.all_accounts
+    region = "us-east-1"
+  })
+}

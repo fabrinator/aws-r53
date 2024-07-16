@@ -27,3 +27,4 @@ jobs:
           terraform_version: "1.9.2"
       - run: terraform init && terraform apply -auto-approve
       - run: aws sts get-caller-identity --profile crc-dev
+      - run: aws sso logout
