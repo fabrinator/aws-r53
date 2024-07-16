@@ -6,6 +6,9 @@ on:
       - opened
       - synchronize
 
+env:
+  AWS_REGION: "us-east-1"
+
 permissions:
   id-token: write
 jobs:
@@ -18,7 +21,6 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::621897290135:role/oidc-github-actions
-
-
-      - run: aws sts get-caller-identity
+          role-session-name: bootcamp-account
+      - run: aws sts get-caller-identity --profile bootcamp-account
       - run: aws s3 ls
