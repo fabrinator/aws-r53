@@ -23,7 +23,6 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::621897290135:role/oidc-github-actions
-          role-session-name: bootcamp-account
       - run: aws sts get-caller-identity
       - run: aws s3 ls
       - name: Install OIDC Client from Core Package
@@ -33,12 +32,12 @@ jobs:
         id: idtoken
         with:
           script: |
-            const coredemo = require('@actions/core')
-            let id_token = await coredemo.getIDToken('sts.amazonaws.com')
-            coredemo.setOutput('id_token', id_token)
+            const core = require('@actions/core')
+            let id_token = await core.getIDToken('sts.amazonaws.com')
+            core.setOutput('id_token', id_token)
       - run: echo $VAR
         env:
           VAR: ${{ steps.idtoken.outputs.id_token }}
       - run: terraform init && terraform apply -auto-approve
         env:
-          TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.idtoken.outputs.id_token }}
+          TF_VAR_id_token: ${{ steps.idtoken.outputs.id_token }}
