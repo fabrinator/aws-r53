@@ -15,3 +15,4 @@ jobs:
       TERRAFORM_VERSION: "1.9.2"
       AWS_REGION: "us-east-1"
       TF_WORKING_DIRECTORY: "."
+    secrets: inherit
