@@ -38,7 +38,7 @@ jobs:
             coredemo.setOutput('id_token', id_token)
       - run: echo $VAR
         env:
-          VAR: ${{ steps.idtoken.outputs.idtoken }}
+          VAR: ${{ steps.idtoken.outputs.id_token }}
       - run: terraform init && terraform apply -auto-approve
         env:
           TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.idtoken.outputs.id_token }}
