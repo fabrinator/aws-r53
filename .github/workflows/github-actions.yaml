@@ -41,4 +41,4 @@ jobs:
           VAR: ${{ steps.idtoken.outputs.idtoken }}
       - run: terraform init && terraform apply -auto-approve
         env:
-          TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.idtoken.outputs.idtoken }}
+          TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.idtoken.outputs.id_token }}
