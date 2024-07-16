@@ -36,7 +36,9 @@ jobs:
             const coredemo = require('@actions/core')
             let id_token = await coredemo.getIDToken()
             coredemo.setOutput('id_token', id_token)
-      - run: echo $ACTIONS_RUNTIME_TOKEN
+      - run: echo $VAR
+        env:
+          VAR: ${{ steps.idtoken.outputs.idtoken }}
       - run: terraform init && terraform apply -auto-approve
         env:
           TF_VAR_ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.idtoken.outputs.idtoken }}
