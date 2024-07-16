@@ -17,7 +17,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
-          role-to-assume: https://device.sso.us-east-1.amazonaws.com/?user_code=SCMG-ZFKT
+          role-to-assume: arn:aws:iam::621897290135:role/oidc-github-actions
 
 
       - run: aws sts get-caller-identity
