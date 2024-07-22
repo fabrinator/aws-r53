@@ -26,4 +26,5 @@ jobs:
       AWS_REGION: "us-east-1"
       TF_WORKING_DIRECTORY: "."
       TF_EXTRA_OPTIONS: "--var-file=stage.fabririvas.com.tfvars"
+      TF_WORKSPACE: "dev"
     secrets: inherit
