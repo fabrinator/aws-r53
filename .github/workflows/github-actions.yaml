@@ -17,7 +17,7 @@ jobs:
       AWS_REGION: "us-east-1"
       TF_WORKING_DIRECTORY: "."
       TF_EXTRA_OPTIONS: "--var-file=fabririvas.com.tfvars"
-      TF_PROVIDER_AWS_ACCOUNT:
+      TF_PROVIDER_AWS_ACCOUNT: 730335655220
     secrets: inherit
   terraform_dev:
     name: TF Dev
@@ -28,5 +28,5 @@ jobs:
       TF_WORKING_DIRECTORY: "."
       TF_EXTRA_OPTIONS: "--var-file=dev.fabririvas.com.tfvars"
       TF_WORKSPACE: "dev"
-      TF_PROVIDER_AWS_ACCOUNT:
+      TF_PROVIDER_AWS_ACCOUNT: 912008965710
     secrets: inherit
