@@ -1,31 +1,78 @@
-provider "aws" {
-  alias = "bootcamp-account"
-  region = "us-east-1"
-  assume_role_with_web_identity {
-    role_arn                = "arn:aws:iam::621897290135:role/oidc-github-actions"
-    web_identity_token = var.id_token
+#TODO:
+#Crear backend
+#Pasar por pipeline
+module "zones" {
+  source  = "terraform-aws-modules/route53/aws//modules/zones"
+  version = "~> 3.0"
+  providers = {
+    aws = aws.infra-shared
+  }
+  zones = {
+    "fabririvas.com" = {
+      comment = "Domain for fabririvas.com"
+      tags = {
+        partition = "public"
+      }
+    }
+  }
+  tags = {
+    ManagedBy = "Terraform"
   }
 }
 
-provider "aws" {
-  alias = "crc-dev"
-  region = "us-east-1"
-  assume_role_with_web_identity {
-    role_arn                = "arn:aws:iam::912008965710:role/oidc-github-actions"
-    web_identity_token = var.id_token
+module "records" {
+  source  = "terraform-aws-modules/route53/aws//modules/records"
+  version = "~> 3.0"
+  zone_name = keys(module.zones.route53_zone_name)[0]
+  providers = {
+    aws = aws.infra-shared
   }
+  records = [
+    {
+      name = ""
+      type = "MX"
+      ttl  = 300
+      records = [
+        "10 fabririvas.com.mx.one.com",
+      ]
+    },
+    {
+      name = ""
+      type = "TXT"
+      ttl =  300
+      records = [
+        "v=spf1 include:_custspf.one.com ~all"
+      ]
+    },
+    {
+      name           = "ed1._domainkey"
+      type           = "CNAME"
+      ttl            = 300
+      records        = ["ed1.dkim.c420fb9ld.service.one"]
+    },
+    {
+      name           = "ed2._domainkey"
+      type           = "CNAME"
+      ttl            = 300
+      records        = ["ed2.dkim.c420fb9ld.service.one"]
+    },
+    {
+      name           = "rsa1._domainkey"
+      type           = "CNAME"
+      ttl            = 300
+      records        = ["rsa1.dkim.c420fb9ld.service.one"]
+    },
+    {
+      name           = "rsa2._domainkey"
+      type           = "CNAME"
+      ttl            = 300
+      records        = ["rsa2.dkim.c420fb9ld.service.one"]
+    }
+
+
+  ]
+
+  depends_on = [module.zones]
 }
 
-data "aws_caller_identity" "this" {
-  provider = aws.bootcamp-account
-}
 
-data "aws_caller_identity" "this2" {
-  provider = aws.crc-dev
-}
-
-output "out" {
-  value = [data.aws_caller_identity.this.account_id, data.aws_caller_identity.this2.account_id]
-}
-
-variable "id_token" {}
