@@ -40,4 +40,3 @@ jobs:
       TF_WORKSPACE: "dev"
       TF_PROVIDER_AWS_ACCOUNT: 912008965710
     secrets: inherit
-    if: contains(github.event.pull_request.labels.*.name, 'dev')
