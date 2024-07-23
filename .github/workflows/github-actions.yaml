@@ -26,7 +26,7 @@ jobs:
       TF_EXTRA_OPTIONS: "--var-file=fabririvas.com.tfvars"
       TF_PROVIDER_AWS_ACCOUNT: 730335655220
     secrets: inherit
-    if: ${{ github.event.labels.name == 'prod' }}
+    if: contains(github.event.pull_request.labels.*.name, 'prod')
   terraform_dev:
     name: TF Dev
     uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
@@ -38,4 +38,4 @@ jobs:
       TF_WORKSPACE: "dev"
       TF_PROVIDER_AWS_ACCOUNT: 912008965710
     secrets: inherit
-    if: ${{ github.event.labels.name == 'dev' }}
+    if: contains(github.event.pull_request.labels.*.name, 'dev')
