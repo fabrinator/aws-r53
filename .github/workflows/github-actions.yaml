@@ -9,6 +9,13 @@ permissions:
   id-token: write
   pull-requests: write
 jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
   terraform_prod:
     name: TF Live
     uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
