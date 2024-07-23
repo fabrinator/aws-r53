@@ -1,5 +1,5 @@
 name: Terraform
-run-name: Terraform workflow ${{ join(["A","B"], '-') }}
+run-name: Terraform workflow ${{ github.head_ref }} \#${{ github.event.number }}
 on:
   pull_request:
     types:
