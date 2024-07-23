@@ -1,5 +1,5 @@
 name: Terraform
-run-name: Terraform workflow ${{ github.head_ref }} \#${{ github.event.number }}
+run-name: Terraform ${{ github.head_ref }} #${{ github.event.number }}
 on:
   pull_request:
     types:
