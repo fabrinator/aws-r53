@@ -9,15 +9,6 @@ permissions:
   id-token: write
   pull-requests: write
 jobs:
-  one:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Env vars
-        run: env
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
   terraform_dev:
     name: TF Dev
     uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
