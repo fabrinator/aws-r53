@@ -1,4 +1,4 @@
-name: Terraform
+name: Terraform ${{ github.repository_owner_id }}
 run-name: Terraform workflow
 on:
   pull_request:
