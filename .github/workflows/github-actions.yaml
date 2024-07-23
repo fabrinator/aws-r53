@@ -5,7 +5,6 @@ on:
     types:
       - opened
       - synchronize
-      - labeled
 permissions:
   id-token: write
   pull-requests: write
@@ -17,18 +16,6 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
-  terraform_prod:
-    name: TF Live
-    uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
-    with:
-      TERRAFORM_VERSION: "1.9.2"
-      AWS_REGION: "us-east-1"
-      TF_WORKING_DIRECTORY: "."
-      TF_EXTRA_OPTIONS: "--var-file=fabririvas.com.tfvars"
-      TF_WORKSPACE: "prod"
-      TF_PROVIDER_AWS_ACCOUNT: 730335655220
-    secrets: inherit
-    if: contains(github.event.pull_request.labels.*.name, 'prod')
   terraform_dev:
     name: TF Dev
     uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
@@ -40,3 +27,16 @@ jobs:
       TF_WORKSPACE: "dev"
       TF_PROVIDER_AWS_ACCOUNT: 912008965710
     secrets: inherit
+  terraform_prod:
+    name: TF Live
+    uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
+    needs: terraform_dev
+    with:
+      TERRAFORM_VERSION: "1.9.2"
+      AWS_REGION: "us-east-1"
+      TF_WORKING_DIRECTORY: "."
+      TF_EXTRA_OPTIONS: "--var-file=fabririvas.com.tfvars"
+      TF_WORKSPACE: "prod"
+      TF_PROVIDER_AWS_ACCOUNT: 730335655220
+    secrets: inherit
+    if: contains(github.event.pull_request.labels.*.name, 'prod')
