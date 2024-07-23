@@ -39,4 +39,3 @@ jobs:
       TF_WORKSPACE: "prod"
       TF_PROVIDER_AWS_ACCOUNT: 730335655220
     secrets: inherit
-    if: contains(github.event.pull_request.labels.*.name, 'prod')
