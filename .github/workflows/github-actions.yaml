@@ -12,6 +12,8 @@ jobs:
   one:
     runs-on: ubuntu-latest
     steps:
+      - name: Env vars
+        run: env
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}

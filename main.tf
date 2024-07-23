@@ -14,10 +14,3 @@ module "records" {
   records = var.records
   depends_on = [module.zones]
 }
-
-
-data "aws_caller_identity" "current" {}
-
-output "info" {
-  value = data.aws_caller_identity.current
-}
