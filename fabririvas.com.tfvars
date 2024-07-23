@@ -47,5 +47,16 @@ records = [
     type           = "CNAME"
     ttl            = 300
     records        = ["rsa2.dkim.c420fb9ld.service.one"]
-  }
+  },
+  {
+    name = "dev"
+    type = "NS"
+    ttl  = 300
+    records = [
+      "ns-1195.awsdns-21.org",
+      "ns-18.awsdns-02.com",
+      "ns-1569.awsdns-04.co.uk",
+      "ns-911.awsdns-49.net"
+    ]
+  },
 ]
