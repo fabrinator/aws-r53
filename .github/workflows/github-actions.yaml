@@ -30,7 +30,6 @@ jobs:
   terraform_prod:
     name: TF Live
     uses: fabrinator/actions/.github/workflows/terraform.yaml@feature/oidc-auth
-    needs: terraform_dev
     with:
       TERRAFORM_VERSION: "1.9.2"
       AWS_REGION: "us-east-1"
