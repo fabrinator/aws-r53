@@ -1,5 +1,5 @@
 name: Terraform
-run-name: Terraform workflow ${{ github.repository_owner_id }}
+run-name: Terraform workflow ${{ github.event.pull_request.labels.*.name }}
 on:
   pull_request:
     types:
