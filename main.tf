@@ -1,6 +1,3 @@
-#TODO:
-#Crear backend
-#Pasar por pipeline
 module "zones" {
   source  = "terraform-aws-modules/route53/aws//modules/zones"
   version = "~> 3.0"
@@ -19,3 +16,8 @@ module "records" {
 }
 
 
+data "aws_caller_identity" "current" {}
+
+output "info" {
+  value = data.aws_caller_identity.current
+}
