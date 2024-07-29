@@ -53,10 +53,10 @@ records = [
     type = "NS"
     ttl  = 300
     records = [
-      "ns-1195.awsdns-21.org",
-      "ns-18.awsdns-02.com",
-      "ns-1569.awsdns-04.co.uk",
-      "ns-911.awsdns-49.net"
+      "ns-857.awsdns-43.net",
+      "ns-253.awsdns-31.com",
+      "ns-1423.awsdns-49.org",
+      "ns-1980.awsdns-55.co.uk"
     ]
   },
 ]
