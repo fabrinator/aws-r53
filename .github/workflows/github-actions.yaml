@@ -18,7 +18,7 @@ jobs:
       TF_WORKING_DIRECTORY: "."
       TF_EXTRA_OPTIONS: "--var-file=dev.fabririvas.com.tfvars"
       TF_WORKSPACE: "dev"
-      TF_PROVIDER_AWS_ACCOUNT: 912008965710
+      TF_PROVIDER_AWS_ACCOUNT: 730335655220
     secrets: inherit
   terraform_prod:
     name: TF Live
