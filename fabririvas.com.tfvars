@@ -62,7 +62,7 @@ records = [
   {
     name           = "api.fabririvas.com"
     type           = "CNAME"
-    ttl            = 300
+    ttl            = 400
     records        = ["lephcqc59i.execute-api.us-east-1.amazonaws.com"]
   },
 ]
