@@ -59,4 +59,10 @@ records = [
       "ns-1980.awsdns-55.co.uk"
     ]
   },
+  {
+    name           = "api.fabririvas.com"
+    type           = "CNAME"
+    ttl            = 300
+    records        = ["lephcqc59i.execute-api.us-east-1.amazonaws.com"]
+  },
 ]
