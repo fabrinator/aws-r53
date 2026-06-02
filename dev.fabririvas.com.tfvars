@@ -16,4 +16,12 @@ records = [
       "10.0.0.1",
     ]
   },
+  {
+    name = "devtest"
+    type = "A"
+    ttl  = 300
+    records = [
+      "10.0.0.5",
+    ]
+  }  
 ]
